@@ -16,16 +16,12 @@
 
   <script src="dist/everything.min.js"></script>
 
-   <script>
-   window.angularTranslationLanguages = ['en', 'hn'];
-   </script>
-
-  <script src="http://yoav-zibin.github.io/emulator/dist/turnBasedServices.2.min.js"></script>
+  <script src="http://yoav-zibin.github.io/emulator/dist/turnBasedServices.3.min.js"></script>
 
   <link rel="stylesheet" type="text/css" href="http://yoav-zibin.github.io/emulator/main.css">
   <link rel="stylesheet" type="text/css" href="styles/game.css">
 </head>
-<body ng-cloak ng-controller="Ctrl">
+<body ng-cloak>
 	<div style="position:absolute; bottom:15px; left: 15px; z-index:10;">
 		<div ng-click="isHelpModalShown = true"
 		class="ico-help" aria-hidden="true"></div>
@@ -115,8 +111,8 @@
 	  <div ng-repeat="col in [0, 1, 2, 3, 4, 5]"
 		  style="position:absolute; top:0; left:{{col * 16.7}}%; width:16.7%; height:100%;"
 		  id="{{'e2e_test_div_' + row + 'x' + col}}">
-		<div ng-class="{pit: true, top: row == 0, bottom: row == 1, valid:isValid(row,col)}" id="{{'pit_'+ row + 'x' + col}}">
-		  <div class="seeds" id="{{'e2e_test_seeds_'+ row + 'x' + col}}">{{getSeeds(row, col)}}</div>
+		<div ng-class="{pit: true, top: row == 0, bottom: row == 1, valid:game.isValid(row,col)}" id="{{'pit_'+ row + 'x' + col}}">
+		  <div class="seeds" id="{{'e2e_test_seeds_'+ row + 'x' + col}}">{{game.getSeeds(row, col)}}</div>
 		</div>
 
 	  </div>
