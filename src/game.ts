@@ -31,7 +31,8 @@ module game{
             dragMove : any = null,
             boardTemp : any = null;
   var gameArea : any;
-  var scoreEl : any;
+  var scoreEl = [angular.element(document.getElementById('e2e_test_player1score')).parent(),
+			angular.element(document.getElementById('e2e_test_player2score')).parent()];
 
     export function init() {
       console.log("Translation of 'RULES_OF_OWARE' is " + translate('RULES_OF_OWARE'));
@@ -44,14 +45,13 @@ module game{
       });
 
       // See http://www.sitepoint.com/css3-animation-javascript-event-handlers/
+			scores = [0, 0];
       dragAndDropService.addDragListener("gameArea", handleDragEvent);
     }
 
     function handleDragEvent(type: any , cx: any , cy: any ) {
 
       gameArea = document.getElementById("gameArea");
-      scoreEl = [angular.element(document.getElementById('e2e_test_player1score')).parent(),
-      		angular.element(document.getElementById('e2e_test_player2score')).parent()];
 
     	if(dragSet || !isYourTurn) {
             return;
@@ -193,9 +193,9 @@ module game{
 				pEl.addClass('captured');
 			}
         //     $scope.$apply(function(){
-				// setTimeout(function(){
+				setTimeout(function(){
 					updateVals(val, callback);
-				// }, 400);
+				}, 400);
         //     });
 
 
@@ -241,7 +241,7 @@ module game{
     	});
     }
 
-    scores = [0, 0];
+
 	//resizeGameAreaService.setWidthToHeight(1.6);
 
 /*	$translate('OWARE_GAME').then(function (translation) {
@@ -345,6 +345,7 @@ module game{
 	};
 
 	export function getScore (row : any) {
+		log.info(scores);
 		return scores[row];
 	};
 

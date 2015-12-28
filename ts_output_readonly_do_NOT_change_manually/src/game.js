@@ -18,7 +18,8 @@ var game;
     var dragEl;
     var numRows = 2, numCols = 6, dragStartPos = null, baseEl = null, baseParent = null, basePos = null, baseVal = null, nextZIndex = 15, dragSet = false, set = null, setIndex = 0, dragMove = null, boardTemp = null;
     var gameArea;
-    var scoreEl;
+    var scoreEl = [angular.element(document.getElementById('e2e_test_player1score')).parent(),
+        angular.element(document.getElementById('e2e_test_player2score')).parent()];
     function init() {
         console.log("Translation of 'RULES_OF_OWARE' is " + translate('RULES_OF_OWARE'));
         resizeGameAreaService.setWidthToHeight(1.6);
@@ -29,13 +30,12 @@ var game;
             updateUI: updateUI
         });
         // See http://www.sitepoint.com/css3-animation-javascript-event-handlers/
+        scores = [0, 0];
         dragAndDropService.addDragListener("gameArea", handleDragEvent);
     }
     game.init = init;
     function handleDragEvent(type, cx, cy) {
         gameArea = document.getElementById("gameArea");
-        scoreEl = [angular.element(document.getElementById('e2e_test_player1score')).parent(),
-            angular.element(document.getElementById('e2e_test_player2score')).parent()];
         if (dragSet || !isYourTurn) {
             return;
         }
@@ -156,8 +156,9 @@ var game;
                 pEl.addClass('captured');
             }
             //     $scope.$apply(function(){
-            // setTimeout(function(){
-            updateVals(val, callback);
+            setTimeout(function () {
+                updateVals(val, callback);
+            }, 400);
         }
         else {
             setIndex = 0;
@@ -194,7 +195,6 @@ var game;
             dragSet = false;
         });
     }
-    scores = [0, 0];
     //resizeGameAreaService.setWidthToHeight(1.6);
     /*	$translate('OWARE_GAME').then(function (translation) {
           console.log("Translation of 'OWARE_GAME' is " + translation);
@@ -286,6 +286,7 @@ var game;
     game.getSeeds = getSeeds;
     ;
     function getScore(row) {
+        log.info(scores);
         return scores[row];
     }
     game.getScore = getScore;
